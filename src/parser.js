@@ -12,14 +12,14 @@ class Parser {
     this.pug = '';
     this.root = root;
 
-    const { useTabs, useCommas, doubleQuotes } = options;
+    const { useTabs, useCommas, useDoubleQuotes } = options;
 
     // Tabs or spaces
     this.indentStyle = useTabs ? '\t' : '  ';
     // Comma separate attributes
     this.separatorStyle = useCommas ? ', ' : ' ';
     // Single quotes or double
-    this.quoteStyle = doubleQuotes ? '"' : "'";
+    this.quoteStyle = useDoubleQuotes ? '"' : "'";
   }
 
   getIndent(level = 0) {
@@ -159,12 +159,12 @@ class Parser {
     const { value } = node;
     const indent = this.getIndent(level);
 
-    // Omit line breaks between HTML elements
-    if (/^[\n]+$/.test(value)) {
+    // Omit line breaks between HTML elements and extra white spaces
+    if (/^(\n|\s+)+$/.test(value)) {
       return false;
     }
 
-    return `${indent}| ${value}`;
+    return `${indent}| ${value.replace(/\s$/, '&#32;')}`;
   }
 
   /**

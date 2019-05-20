@@ -5,6 +5,7 @@ const Pugify = require('./parser');
 const defaultOptions = {
   // nghtml2pug options
   useTabs: false,
+  useDoubleQuotes: false,
   useCommas: true,
 
   // html-minifier options
