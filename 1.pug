@@ -1,0 +1,89 @@
+form.pt-0([formGroup]='tableForm', *ngIf='currentParams$ | async as params')
+  .clr-row.clr-align-items-baseline.clr-justify-content-between
+    .clr-col-auto
+      .clr-row.clr-align-items-baseline
+        h3.clr-col-auto.mt-0
+          ng-container(*ngIf='params.dateRange.from !== params.dateRange.to') {{ params.dateRange.from | date:'longDate' }} — {{ params.dateRange.to | date:'longDate' }}
+          ng-container(*ngIf='params.dateRange.from === params.dateRange.to') {{ params.dateRange.from | date:'longDate' }}
+        .clr-col-auto
+          div(*ngIf='isTableReloading; then loading')
+    .clr-col-auto.btn-group.btn-link.daterange-selector
+      .radio.btn([class.disabled]='tableForm.controls[\'dateRangeAlias\'].disabled')
+        input#btn-today(type='radio', value='today', formControlName='dateRangeAlias')
+        |  
+        label(for='btn-today') Today
+      .radio.btn([class.disabled]='tableForm.controls[\'dateRangeAlias\'].disabled')
+        input#btn-yesterday(type='radio', value='yesterday', formControlName='dateRangeAlias')
+        |  
+        label(for='btn-yesterday') Yesterday
+      .radio.btn([class.disabled]='tableForm.controls[\'dateRangeAlias\'].disabled')
+        input#btn-thisweek(type='radio', value='thisWeek', formControlName='dateRangeAlias')
+        |  
+        label(for='btn-thisweek') This Week
+      .radio.btn([class.disabled]='tableForm.controls[\'dateRangeAlias\'].disabled')
+        input#btn-7days(type='radio', value='last7days', formControlName='dateRangeAlias')
+        |  
+        label(for='btn-7days') 7 Days
+      .radio.btn([class.disabled]='tableForm.controls[\'dateRangeAlias\'].disabled')
+        input#btn-custom(type='radio', value='custom', formControlName='dateRangeAlias')
+        |  
+        label(for='btn-custom', (click)='openCustomDateRangeModal()') Custom
+  ng-container(*ngIf='filtersList?.length')
+    .clr-row.mt-05(style='margin-left: -.75rem;', [class.app-disabled]='isTableReloading')
+      .clr-col-12(*ngIf='filtersList as filters')
+        span.label.filter-label(*ngFor='let filter of filters')
+          | {{ filter?.title }}
+          clr-icon(shape='times', role='button', (click)='disableFilter(filter?.type)')
+  ng-container(*ngIf='lineChartData$ | async as lineData; else loadingChart')
+    ng-container(*ngIf='lineChartOptions$ | async as lineOptions')
+      // todo: сделать нормальный маркер графика "однодневки"
+      .clr-row.clr-justify-content-end.mt-2(*ngIf='lineData.datasets[0].data.length > 1')
+        .clr-col-auto
+          clr-select-container.mt-0
+            select(clrSelect, formControlName='chartMetricIndex', *ngIf='metricColumns$ | async as metrics')
+              option(*ngFor='let metric of metrics', [ngValue]='metric.index') {{ metric.header }}
+        .clr-col-12.mt-05
+          canvas(baseChart, height='260', [datasets]='lineData.datasets', [labels]='lineData.labels', [legend]='false', [chartType]='\'line\'', [options]='lineOptions', [plugins]='[]', [class.app-disabled]='isTableReloading')
+  ng-container(*ngIf='isTableNotEmpty')
+    .clr-row.clr-justify-content-end(*ngIf='breakdownsList$ | async as breakdownsList')
+      .clr-col-auto.clr-form-control
+        .btn-group(formArrayName='breakdowns')
+          .checkbox.btn(*ngFor='let breakdown of breakdownsForm.controls; let i = index', [class.disabled]='isBreakdownDisabled(breakdownsList[i].key, params.filters)', (click)='breakdownClick$.next({$event: $event, index: i})')
+            input(type='checkbox', [attr.id]='\'btn-breakdown-check-\' + i', [formControlName]='i')
+            |  
+            label([for]='\'btn-breakdown-check-\' + i') {{breakdownsList[i].title}}
+ng-container(*ngIf='currentParams$ | async as params')
+  .clr-row(*ngIf='table$ | async as table')
+    .clr-col-12
+      app-flat-table(*ngIf='isTableNotEmpty; else empty', [table]='table', [currentSort]='params.sort', [displayedColumns]='displayedColumns', [disabled]='isTableReloading', (filterEvents)='applyFilter($event)', (sortEvents)='applySort($event, table.params.sort)')
+ng-template(#loading)
+  span.spinner.spinner-sm
+ng-template(#loadingChart)
+  .clr-row.clr-justify-content-center
+    .clt-col-auto(style='min-height: 260px;')
+ng-template(#empty)
+  ng-container(*ngIf='!isTableReloading') There is no data yet…
+clr-modal([(clrModalOpen)]='showCustomDateRangeForm', [clrModalSize]='\'sm\'', [clrModalClosable]='false')
+  h3.modal-title Select date range
+  .modal-body
+    p.p7.app-text-error(*ngIf='customDateRange.errors as errors')
+      clr-icon(shape='exclamation-circle')
+      span(*ngIf='errors.endDateError')
+        b From
+        |  should be less than 
+        b To
+    form(clrForm, [formGroup]='customDateRange', novalidate)
+      clr-date-container
+        label(for='fromDate') From
+        |  
+        input#fromDate(type='date', clrDate, formControlName='from', placeholder='YY-MM-DD')
+        clr-control-error(*clrIfError='\'required\'') Required
+      clr-date-container
+        label(for='toDate') To
+        |  
+        input#toDate(type='date', clrDate, formControlName='to', placeholder='YY-MM-DD')
+        clr-control-error(*clrIfError='\'required\'') Reqiured
+  .modal-footer
+    button.btn.btn-link(type='button', (click)='cancelCustomDateRangeModal()') Cancel
+    |  
+    button.btn.btn-primary(type='button', (click)='customDateRangeSubmit$.next(true)', [disabled]='!customDateRange.valid') Submit
