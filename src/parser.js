@@ -164,7 +164,10 @@ class Parser {
       return false;
     }
 
-    return `${indent}| ${value.replace(/\s$/, '&#32;')}`;
+    // Replace leading space with HTML symbol
+    const html = value.replace(/\s$/, '&#32;');
+
+    return `${indent}| ${html}`;
   }
 
   /**
