@@ -8,6 +8,8 @@ So *there is a peer dependency*, make sure you have it installed.
 
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
 
+_Initially forked from [html2pug](https://github.com/izolate/html2pug)_
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/pikulev/nghtml2pug/master/repo_files/cover.png" alt="nghtml2pug">
 </p>
