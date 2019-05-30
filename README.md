@@ -5,7 +5,9 @@ So *there is a peer dependency*, make sure you have it installed.
 # nghtml2pug
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
 
-![nghtml2pug](https://raw.githubusercontent.com/pikulev/nghtml2pug/master/repo_files/cover.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pikulev/nghtml2pug/master/repo_files/cover.png" alt="nghtml2pug">
+</p>
 
 Turns this :unamused:
 ```html
