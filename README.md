@@ -2,7 +2,9 @@
 It uses Angular HTML parser from `"@angular/compiler": "^7.2.15"`.
 So *there is a peer dependency*, make sure you have it installed.
 
+
 # nghtml2pug
+[![Build Status](https://travis-ci.org/pikulev/nghtml2pug.svg?branch=master)](https://travis-ci.org/pikulev/nghtml2pug)
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
 
 <p align="center">
