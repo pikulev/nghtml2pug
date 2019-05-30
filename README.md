@@ -1,5 +1,6 @@
 ### IMPORTANT: PEER DEPENDENCY
 It uses Angular HTML parser from `"@angular/compiler": "^7.2.15"`.
+
 So *there is a peer dependency*, make sure you have it installed.
 
 
