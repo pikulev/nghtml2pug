@@ -1,6 +1,10 @@
 # nghtml2pug
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
 
+## Important
+It uses Angular HTML parser from `"@angular/compiler": "^7.2.15"`.
+So _there is a peer dependency_, make sure you have it installed.
+
 Turns this :unamused:
 ```html
 <ng-container *ngFor="lel item of items; let i = index">
