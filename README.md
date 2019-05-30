@@ -23,13 +23,13 @@ ng-container(*ngFor='lel item of items; let i = index')
 
 Get it on [npm](https://www.npmjs.com/package/nghtml2pug):
 
-In case when your project doesn't have `@angular/compiler`
-```bash
-npm i @angular/compiler
-```
-
 ```bash
 npm i nghtml2pug
+```
+
+In case your project doesn't have `@angular/compiler`
+```bash
+npm i @angular/compiler
 ```
 
 ## Usage
