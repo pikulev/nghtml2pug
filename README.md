@@ -1,9 +1,11 @@
+### IMPORTANT: PEER DEPENDENCY
+It uses Angular HTML parser from `"@angular/compiler": "^7.2.15"`.
+So *there is a peer dependency*, make sure you have it installed.
+
 # nghtml2pug
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
 
-## Important: peer dependency
-It uses Angular HTML parser from `"@angular/compiler": "^7.2.15"`.
-So *there is a peer dependency*, make sure you have it installed.
+![nghtml2pug](https://raw.githubusercontent.com/pikulev/nghtml2pug/master/repo_files/cover.png)
 
 Turns this :unamused:
 ```html
