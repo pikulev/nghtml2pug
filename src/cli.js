@@ -9,7 +9,7 @@ const { version } = require('../package.json');
  * Create a help page
  */
 const help = [
-  '\n  Usage: html2pug [options] < [file]\n',
+  '\n  Usage: nghtml2pug [options] < [file]\n',
   '  Options:\n',
   '    -t, --tabs              Use tabs instead of spaces',
   '    -d, --doubleQuotes      Use double quotes',
@@ -17,9 +17,9 @@ const help = [
   '    -v, --version           Show version\n',
   '  Examples:\n',
   '    # Accept input from file and write to stdout',
-  '    $ html2pug < example.html\n',
+  '    $ nghtml2pug < example.html\n',
   '    # Or write to a file',
-  '    $ html2pug < example.html > example.pug \n',
+  '    $ nghtml2pug < example.html > example.pug \n',
 ].join('\n');
 
 /**

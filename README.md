@@ -1,39 +1,26 @@
 # nghtml2pug
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
-Requires Node.js version `7.6` or higher.
 
 Turns this :unamused:
 ```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <div id="content">
-      <h1 class="title">Hello World!</h1>
-    </div>
-  </body>
-</html>
+<ng-container *ngFor="lel item of items; let i = index">
+  <span class="icon"></span> {{ i + 1}}.{{ item }}
+</ng-container>
 ```
 
 Into this :tada:
 ```pug
-doctype html
-html(lang='en')
-  head
-    title Hello World!
-   body
-    #content
-      h1.title Hello World!
+ng-container(*ngFor='lel item of items; let i = index')
+  span.icon
+  |  {{ i + 1}}.{{ item }}
 ```
 
 ## Install
 
-Get it on [npm](https://www.npmjs.com/package/html2pug):
+Get it on [npm](https://www.npmjs.com/package/nghtml2pug):
 
 ```bash
-npm install -g html2pug
+npm install -g nghtml2pug
 ```
 
 ## Usage
@@ -43,26 +30,26 @@ Accept input from a file or stdin and write to stdout:
 
 ```bash
 # choose a file
-html2pug < example.html
+nghtml2pug < example.html
 
 # use pipe
-echo '<h1>foo</h1>' | html2pug -f
+echo '<h1>foo</h1>' | nghtml2pug -f
 ```
 
 Write output to a file:
 ```bash
-html2pug < example.html > example.pug
+nghtml2pug < example.html > example.pug
 ```
 
-See `html2pug --help` for more information.
+See `nghtml2pug --help` for more information.
 
 ### Programmatically
 
 ```js
-const html2pug = require('html2pug')
+const ngHTML2Pug = require('nghtml2pug')
 
 const html = '<header><h1 class="title">Hello World!</h1></header>'
-const pug = html2pug(html, { useTabs: true })
+const pug = ngHTML2Pug(html, { useTabs: true })
 ```
 
 ### Options
@@ -70,5 +57,4 @@ const pug = html2pug(html, { useTabs: true })
 Name | Type | Default | Description
 --- | --- | --- | ---
 useTabs | Boolean | `false` | Use tabs instead of spaces
-useCommas | Boolean | `true` | Use commas to separate node attributes, or a space if false
-isFragment | Boolean | `false` | Wraps result in enclosing `<html>` and `<body>` tags if false
+useDoubleQuotes | Boolean | `false` | Use double quotes instead of single quotes
