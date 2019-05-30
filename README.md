@@ -1,9 +1,9 @@
 # nghtml2pug
 Converts angular **HTML** templates to **Pug** templating language (_formerly Jade_).
 
-## Important
+## Important: peer dependency
 It uses Angular HTML parser from `"@angular/compiler": "^7.2.15"`.
-So _there is a peer dependency_, make sure you have it installed.
+So *there is a peer dependency*, make sure you have it installed.
 
 Turns this :unamused:
 ```html
@@ -19,40 +19,41 @@ ng-container(*ngFor='lel item of items; let i = index')
   |  {{ i + 1}}.{{ item }}
 ```
 
+## Usage
+
+### CLI using npx
+Accept input from a file or stdin and write to stdout:
+
+```bash
+# choose a file
+npx nghtml2pug < example.html
+
+# use pipe
+echo '<h1>foo</h1>' | npx nghtml2pug
+```
+
+Write output to a file:
+```bash
+npx nghtml2pug < example.html > example.pug
+```
+
+See `nghtml2pug --help` for more information.
+
 ## Install
 
 Get it on [npm](https://www.npmjs.com/package/nghtml2pug):
 
 ```bash
-npm install -g nghtml2pug
+npm i @angular/compiler
+npm i nghtml2pug
 ```
-
-## Usage
-
-### CLI
-Accept input from a file or stdin and write to stdout:
-
-```bash
-# choose a file
-nghtml2pug < example.html
-
-# use pipe
-echo '<h1>foo</h1>' | nghtml2pug -f
-```
-
-Write output to a file:
-```bash
-nghtml2pug < example.html > example.pug
-```
-
-See `nghtml2pug --help` for more information.
 
 ### Programmatically
 
 ```js
 const ngHTML2Pug = require('nghtml2pug')
 
-const html = '<header><h1 class="title">Hello World!</h1></header>'
+const html = '<tg-template #title><h1>Hello World!</h1></ng-template>'
 const pug = ngHTML2Pug(html, { useTabs: true })
 ```
 
