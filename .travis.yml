@@ -2,4 +2,4 @@ language: node_js
 node_js:
   - "11"
 before_install:
-  - npm i @angular/compiler^7.2.15"
+  - npm i @angular/compiler@7.2.15
