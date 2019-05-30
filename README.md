@@ -19,9 +19,22 @@ ng-container(*ngFor='lel item of items; let i = index')
   |  {{ i + 1}}.{{ item }}
 ```
 
+## Install
+
+Get it on [npm](https://www.npmjs.com/package/nghtml2pug):
+
+In case when your project doesn't have `@angular/compiler`
+```bash
+npm i @angular/compiler
+```
+
+```bash
+npm i nghtml2pug
+```
+
 ## Usage
 
-### CLI using npx
+### CLI using NPX
 Accept input from a file or stdin and write to stdout:
 
 ```bash
@@ -37,16 +50,7 @@ Write output to a file:
 npx nghtml2pug < example.html > example.pug
 ```
 
-See `nghtml2pug --help` for more information.
-
-## Install
-
-Get it on [npm](https://www.npmjs.com/package/nghtml2pug):
-
-```bash
-npm i @angular/compiler
-npm i nghtml2pug
-```
+`npx nghtml2pug -- --help` for more information.
 
 ### Programmatically
 
