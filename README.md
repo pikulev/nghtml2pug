@@ -1,7 +1,7 @@
 # nghtml2pug
-[![Build Status](https://travis-ci.org/pikulev/nghtml2pug.svg?branch=master)](https://travis-ci.org/pikulev/nghtml2pug)
-
 Converts angular **HTML** to **Pug** templating language (_formerly Jade_).
+
+[![Build Status](https://travis-ci.org/pikulev/nghtml2pug.svg?branch=master)](https://travis-ci.org/pikulev/nghtml2pug)
 
 _Initially forked from [html2pug](https://github.com/izolate/html2pug)_
 
